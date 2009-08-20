@@ -11,8 +11,8 @@
       %tr{:id => svc, :class => 'service'}
         %td= svc
         %td= @watches[svc].group.nil? ? "--" : @watches[svc].group
-        %td= "%.2f%%" % @watches[svc].cpu_usage
-        %td= @watches[svc].memory_usage.to_s + "kb"
+        %td= (@watches[svc].respond_to? "cpu_usage")? ("%.2f%%" % @watches[svc].cpu_usage) : "N/A"
+        %td= (@watches[svc].respond_to? "memory_usage")? (@watches[svc].memory_usage.to_s + "kb") : "N/A"
         %td= @watches[svc].state
 
 %div{:id => "controls", :class => "jqmWindow", :style => "display: none;"}
