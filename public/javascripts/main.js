@@ -21,5 +21,13 @@ $(document).ready(function() {
       $('#controls').jqmShow();
     });
   });
+  $('.log_td a').each(function() {
+      $(this).bind("click", function(e) {
+          console.log('e: ', e);
+          window.open(e.target.href, "_blank", "toolbar=no,menubar=no,scrollbars=yes,resizable=yes");
+          return false;
+      });
+  });
+  
   
 });

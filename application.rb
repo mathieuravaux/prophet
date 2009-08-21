@@ -19,6 +19,18 @@ class Prophet < Merb::Controller
   end
 
   ##
+  # Streams the god log to the client
+  ## 
+  def log service
+    headers['Content-Type'] = 'text/plain'
+    headers['Cache-Control'] = 'no-cache'
+    headers['Pragma'] = 'no-cache'
+    @service = service
+    @log = GOD.running_log(service, Time.at(0))
+    display @log, :layout => false
+  end
+
+  ##
   # Handles control commands for services	
   ##
   def control(command, service)

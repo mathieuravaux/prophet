@@ -18,6 +18,12 @@ end
 Merb::Router.prepare do
   match('/').to(:controller => 'prophet', :action =>'index').name(:root)
   match('/no_god').to(:controller => 'prophet', :action => 'no_god').name(:no_god)
+  match('/log') do
+    with(:controller => 'prophet') do
+      match('').to(:action => 'log').name(:log)
+      match('/:service').to(:action => 'log')
+    end
+  end
   match('/control') do
     with(:controller => 'prophet') do
       match('').to(:action => 'control').name(:control)

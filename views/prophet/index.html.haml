@@ -6,6 +6,7 @@
       %th CPU
       %th Memory
       %th Status
+      %th Log
   %tbody
     - @watches.keys.each do |svc|
       %tr{:id => svc, :class => 'service'}
@@ -14,6 +15,7 @@
         %td= (@watches[svc].respond_to? "cpu_usage")? ("%.2f%%" % @watches[svc].cpu_usage) : "N/A"
         %td= (@watches[svc].respond_to? "memory_usage")? (@watches[svc].memory_usage.to_s + "kb") : "N/A"
         %td= @watches[svc].state
+        %td{:class => "log_td"}= (@watches[svc].log == "/dev/null") ? '-' : ( tag :a, @watches[svc].log, :target => "_blank", :href => "log/" + svc)
 
 %div{:id => "controls", :class => "jqmWindow", :style => "display: none;"}
   %h2#control_svc
